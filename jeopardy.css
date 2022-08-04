@@ -82,7 +82,7 @@ body {
     top: 0;
     left: 0;
     z-index: 999;
-    background: rgba(255, 255, 255, 0.8) url('loader.gif') center no-repeat;
+    background: rgba(255, 255, 255, 0.8) url('https://media4.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif?cid=ecf05e47uiey52ohm65t7qt1xv09f24rbifcvldfb85qify1&rid=giphy.gif&ct=g') center no-repeat;
   }
   /* Turn off scrollbar when body element has the loading class */
   body.loading {
