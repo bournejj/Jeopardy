@@ -7,7 +7,7 @@
 */
 
 body {
-    background-color: aquamarine;
+    background-color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
       'Lucida Sans', Arial, sans-serif;
   }
@@ -15,6 +15,8 @@ body {
   table {
     width: 96%;
     margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
   }
   table th,
   table td {
@@ -27,7 +29,7 @@ body {
   }
   table th {
     font-size: 90%;
-    background-color: #74119c;
+    background-color: green;
   }
   .card {
     display: -webkit-flex;
@@ -82,7 +84,7 @@ body {
     top: 0;
     left: 0;
     z-index: 999;
-    background: rgba(255, 255, 255, 0.8) url('https://media4.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.gif?cid=ecf05e47uiey52ohm65t7qt1xv09f24rbifcvldfb85qify1&rid=giphy.gif&ct=g') center no-repeat;
+    background: rgba(255, 255, 255, 0.8) url('https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47ieutx99lqk29evtu5v72gwnbnpozl1zthq1zyru6&rid=giphy.gif&ct=g') center no-repeat;
   }
   /* Turn off scrollbar when body element has the loading class */
   body.loading {

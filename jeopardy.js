@@ -60,16 +60,21 @@ async function getCategoryIds() {
  */
 async function getCategory(catId) {
   // pulling details from the API by the catId
+  
   const catResponse = await axios({
     url: `https://jservice.io/api/category?id=${catId}`,
     method: 'GET',
   });
+  console.log(catResponse)
+
   let category = catResponse.data;
   categories.push({
     title: category.title.toUpperCase(),
     id: category.id,
     clues: [category.clues],
+    
   });
+
 }
 
 /** Fill the HTML table#jeopardy with the categories & cells for questions.
@@ -86,6 +91,7 @@ async function fillTable() {
   table += `<button id="reset">Reset Game</button>`;
 
   table += `<table id="jeopardy"><thead><tr>`;
+  console.log(categories)
 
   // headings of table
   for (let header of categories) {
@@ -105,7 +111,14 @@ async function fillTable() {
 
     // clues for each category
     for (let j = 0; j <= 5; j++) {
-      table += `<td><div class="card"><div class="reveal">$${prize}</div><div class="question" style="display: none;">${categories[j].clues[0][i].question}</div><div class="answer" style="display: none;">${categories[j].clues[0][i].answer}</div></div></td>`;
+     
+if(categories[j].length < 6) {
+
+    setupAndStart()
+}
+        else { table += `<td><div class="card"><div class="reveal">$${prize}</div><div class="question" style="display: none;">${categories[j].clues[0][i].question}</div><div class="answer" style="display: none;">${categories[j].clues[0][i].answer}</div></div></td>`;}
+     
+        
     }
 
     table += `</tr>`;
@@ -144,8 +157,9 @@ function showLoadingView() {
 }
 
 /** Remove the loading spinner and update the button used to fetch data. */
-function hideLoadingView() {
+function hideLoadingView(catIDs) {
   $('body').removeClass('loading');
+  getCategory(catIDs);
 }
 
 // my two jQuery loading spinner functions above were taken from https://www.tutorialrepublic.com/faq/how-to-show-loading-spinner-in-jquery.php
@@ -157,9 +171,19 @@ function hideLoadingView() {
  * - create HTML table
  * */
 async function setupAndStart() {
-  showLoadingView();
-  let catIDs = getCategoryIds();
-  getCategory(catIDs);
+    showLoadingView();
+    let catIDs = await getCategoryIds();
+    
+
+  if(catIDs) {
+    hideLoadingView(catsID)
+ 
+  }
+
+
+
+   
+
 }
 
 /** On click of start / restart button, set up game. */
