@@ -28,21 +28,33 @@ async function getCategoryIds() {
   const response = await axios({
     url: `https://jservice.io/api/categories?count=50`,
     method: 'GET',
+    
   });
+  console.log(response)
+
+  let newResponse = [];
+ 
+  let modifiedArr = response.data.map(function(element){
+    if(element.clues_count > 6) {
+      newResponse.push(element)
+    }
+    else return;
+    
+});
 
   // I found the sampleSize code on stackoverflow.com
-  NUM_CATEGORIES = _.sampleSize(response.data, [(n = 6)]);
+  NUM_CATEGORIES = _.sampleSize(newResponse, [(n = 6)]);
 
   for (let num of NUM_CATEGORIES) {
     let categoryID = num.id;
     categoryIDs.push(categoryID);
   }
-
+  console.log()
   for (let catId of categoryIDs) {
     await getCategory(catId);
   }
   $('#jeopardy').remove;
-  fillTable();
+ fillTable();
   return categoryIDs;
 }
 //getCategoryIds();
@@ -65,15 +77,19 @@ async function getCategory(catId) {
     url: `https://jservice.io/api/category?id=${catId}`,
     method: 'GET',
   });
-  console.log(catResponse)
+ 
+//   category.clues/length < 5 do something
 
   let category = catResponse.data;
+
   categories.push({
     title: category.title.toUpperCase(),
     id: category.id,
     clues: [category.clues],
-    
+  
+
   });
+ console.log(categories)
 
 }
 
@@ -111,7 +127,7 @@ async function fillTable() {
 
     // clues for each category
     for (let j = 0; j <= 5; j++) {
-     
+     console.log(categories[j].clues[0][i].answer)
 if(categories[j].length < 6) {
 
     setupAndStart()
